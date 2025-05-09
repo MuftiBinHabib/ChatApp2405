@@ -4,7 +4,7 @@ import { Link } from 'react-router'
 const Home = () => {
   return (
    <div className="container">
-    <section>
+    <section className='flex'>
         <h2>ChatApp</h2>
 
         <ul>
