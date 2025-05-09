@@ -5,3 +5,7 @@
     @apply w-[1150px] mx-auto
   }
 }
+
+@theme {
+  --font-display: "Cal Sans", sans-serif; 
+}
