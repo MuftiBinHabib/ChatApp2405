@@ -1,7 +1,56 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router'
+import toast, { Toaster } from 'react-hot-toast';
 
 const Signup = () => {
+
+  const[userInfo, setuserInfo] =useState({
+    name:"",
+    email:"",
+    pass:""
+
+  })
+
+  
+
+  const handlename = (e)=>{
+    setuserInfo((prev) =>{
+      return{
+        ...prev , name: e.target.value
+      }
+    })
+    
+  }
+
+   const handleemail = (e)=>{
+    setuserInfo((prev) =>{
+      return{
+        ...prev , email: e.target.value
+      }
+    })
+    
+  }
+
+   const handlepass = (e)=>{
+    setuserInfo((prev) =>{
+      return{
+        ...prev , pass: e.target.value
+      }
+    })
+    
+  }
+
+  const handlesignup = (e)=>{
+    e.preventDefault();
+    console.log(userInfo)
+    if (!userInfo.name || !userInfo.email || !userInfo.pass)
+      toast.error("shit")
+    else{
+      console.log(userInfo)
+    }
+  }
+
+
   return (
     <section className="bg-gray-50 dark:bg-gray-900 font-display">
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
@@ -11,7 +60,23 @@ const Signup = () => {
             <h1 className="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-2xl dark:text-white">
               Sign up 
             </h1>
-            <form className="space-y-4 md:space-y-6" action="#">
+            <form onSubmit={handlesignup} className="space-y-4 md:space-y-6" >
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+                >
+                  Your Name
+                </label>
+                <input onChange={handlename}
+                  type="text"
+                  name="text"
+                  id="text"
+                  className="bg-gray-50 border border-gray-300 text-gray-900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="name"
+                  required=""
+                />
+              </div>
               <div>
                 <label
                   htmlFor="email"
@@ -19,7 +84,7 @@ const Signup = () => {
                 >
                   Your email
                 </label>
-                <input
+                <input onChange={handleemail}
                   type="email"
                   name="email"
                   id="email"
@@ -35,7 +100,7 @@ const Signup = () => {
                 >
                   Password
                 </label>
-                <input
+                <input onChange={handlepass}
                   type="password"
                   name="password"
                   id="password"
@@ -85,6 +150,8 @@ const Signup = () => {
           </div>
         </div>
       </div>
+      <Toaster position="top-left"
+  reverseOrder={false} />
     </section>
   )
 }
