@@ -11,6 +11,7 @@ import NotFound from './page/NotFound.jsx';
 import Home from './page/Home.jsx';
 import Login from './page/Login.jsx';
 import Signup from './page/Signup.jsx';
+import firebaseConfig from './firebase.config.js';
 
 const router = createBrowserRouter([
   {

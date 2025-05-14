@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router'
 import toast, { Toaster } from 'react-hot-toast';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from '../firebase.config';
 
 const Signup = () => {
 
@@ -44,9 +46,29 @@ const Signup = () => {
     e.preventDefault();
     console.log(userInfo)
     if (!userInfo.name || !userInfo.email || !userInfo.pass)
-      toast.error("shit")
+      toast.error("Required")
     else{
-      console.log(userInfo)
+      createUserWithEmailAndPassword(auth, userInfo.email, userInfo.pass)
+  .then((userCredential) => {
+    // Signed up 
+    const user = userCredential.user;
+    // ...
+    console.log(user)
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    // console.log(errorCode)
+    // ..
+    if (errorCode.includes("auth/email-already-in-use")){
+      toast.error("Email Already in Use")
+      setuserInfo({
+        name: "",
+        email: "",
+        pass:""
+      })
+    }
+  });
     }
   }
 
@@ -69,6 +91,7 @@ const Signup = () => {
                   Your Name
                 </label>
                 <input onChange={handlename}
+                value = {userInfo.name}
                   type="text"
                   name="text"
                   id="text"
@@ -85,6 +108,7 @@ const Signup = () => {
                   Your email
                 </label>
                 <input onChange={handleemail}
+                value = {userInfo.email}
                   type="email"
                   name="email"
                   id="email"
@@ -101,6 +125,7 @@ const Signup = () => {
                   Password
                 </label>
                 <input onChange={handlepass}
+                value = {userInfo.pass}
                   type="password"
                   name="password"
                   id="password"
