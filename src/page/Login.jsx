@@ -40,7 +40,7 @@ const Login = () => {
           // ...
           console.log(user)
           if(user.emailVerified){
-navigate('/')
+navigate('/homepage')
           }else{
             toast.error("Please verify your email")
           }

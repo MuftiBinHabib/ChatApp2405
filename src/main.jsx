@@ -12,6 +12,8 @@ import Home from './page/Home.jsx';
 import Login from './page/Login.jsx';
 import Signup from './page/Signup.jsx';
 import firebaseConfig from './firebase.config.js';
+import Homepage from './page/Homepage.jsx';
+import Rootlayout from './components/Rootlayout.jsx';
 
 const router = createBrowserRouter([
   {
@@ -28,6 +30,16 @@ const router = createBrowserRouter([
   {
     path: "/signup",
       element : <Signup />,
+  },
+   {
+    path: "/homepage",
+      element : <Rootlayout />,
+       children: [
+      {
+        index: true,
+        element: <Homepage /> 
+      },
+       ]
   },
       
       
