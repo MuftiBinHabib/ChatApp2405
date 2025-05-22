@@ -3,7 +3,7 @@ import React from 'react'
 const Groups = () => {
   return (
     <div className="container">
-        <section className='mt-4 font-display border  rounded '>
+        <section className='mt-4 font-display border  rounded w-50'>
             <h2 className='w-50 bg-green-400 text-white rounded'>Groups</h2>
 
             <ul className='mt-4 space-y-2'>

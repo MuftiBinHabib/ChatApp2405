@@ -3,7 +3,7 @@ import React from 'react'
 const Chats = () => {
   return (
     <div className="container">
-        <section className='mt-4 font-display border  rounded '>
+        <section className='mt-4 font-display border  rounded w-50'>
             <h2 className='w-50 bg-green-400 text-white rounded'>Chats</h2>
 
             <ul className='space-y-2 mt-4'>
