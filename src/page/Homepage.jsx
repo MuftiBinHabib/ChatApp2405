@@ -3,13 +3,18 @@ import Chats from '../components/Chats'
 import Groups from '../components/Groups'
 import FriendRequest from '../components/FriendRequest'
 import Settings from '../components/Settings'
-import { logindata } from '../components/LoginData'
+import LoginData from '../../context/LoginData'
+import {logindata} from '../../context/LoginData'
+import { useSelector } from 'react-redux'
+
 
 
 const Homepage = () => {
 
-  const loggedinuser = useContext(logindata)
-  console.log(loggedinuser)
+ const data = useSelector((state)=>(state.userLogin.value))
+ console.log(data)
+
+ 
   return (
     <div className="container">
       <section className='grid grid-cols-2 gap-20'>

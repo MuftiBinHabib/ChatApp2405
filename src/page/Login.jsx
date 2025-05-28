@@ -4,8 +4,13 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../firebase.config";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router";
+import { useDispatch } from "react-redux";
+import { userLoginInfo } from "../slices/userSlices";
+
+
 
 const Login = () => {
+   const dispatch = useDispatch();
   const [userInfo, setuserInfo] = useState({
     email: "",
     pass: "",
@@ -40,6 +45,8 @@ const Login = () => {
           // ...
           console.log(user)
           if(user.emailVerified){
+            dispatch(userLoginInfo(user))
+            localStorage.setItem('login' , JSON.stringify(user))  //convert so browser can understand
 navigate('/homepage')
           }else{
             toast.error("Please verify your email")
@@ -64,9 +71,12 @@ navigate('/homepage')
       alert("email and pass required"); //edit this with toast
     }
   };
+
+
   return (
     <section className="bg-gray-50 dark:bg-gray-900 font-display">
       <Toaster />
+      
       <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
         <div className="w-full bg-white rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">

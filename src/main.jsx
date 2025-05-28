@@ -14,7 +14,12 @@ import Signup from './page/Signup.jsx';
 import firebaseConfig from './firebase.config.js';
 import Homepage from './page/Homepage.jsx';
 import Rootlayout from './components/Rootlayout.jsx';
-import LoginData from './components/LoginData.jsx';
+import LoginData from '../context/LoginData.jsx';
+import { store } from './store'
+import { Provider } from 'react-redux'
+
+
+
 
 const router = createBrowserRouter([
   {
@@ -49,7 +54,9 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById('root')).render(
- <LoginData>
+ 
+<Provider store={store} >
  <RouterProvider router={router} />
- </LoginData>
+</Provider>
+ 
 )
