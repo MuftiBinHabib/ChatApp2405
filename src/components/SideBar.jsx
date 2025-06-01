@@ -1,7 +1,49 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
+import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router'
+import { userLoginInfo } from '../slices/userSlices'
+
+
 
 const SideBar = () => {
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const auth = getAuth()
+  console.log(auth.currentUser)
+
+  console.log(auth.currentUser)
+
+
+ useEffect(() =>{
+
+  onAuthStateChanged(auth, (user) => {
+    console.log(user)
+  if (user) {
+   dispatch(userLoginInfo({
+name: user.displayName,
+    email: user.email,
+    uid: user.uid
+   }
+    
+   ))
+    const uid = user.uid;
+    // ...
+  } else {
+    // User is signed out
+    // ...
+    dispatch(userLoginInfo(null))
+  }
+});
+ }, [dispatch])
+
+useEffect(() => {
+  if(!data){
+    navigate('/login')
+  }
+} , [])
+
 
   const data = useSelector((state)=>(state.userLogin.value))
    console.log(data)

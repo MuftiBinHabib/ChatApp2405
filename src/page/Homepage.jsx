@@ -13,43 +13,7 @@ import { userLoginInfo } from '../slices/userSlices'
 
 const Homepage = () => {
 
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const auth = getAuth()
-  console.log(auth.currentUser)
-
-  console.log(auth.currentUser)
-
- const data = useSelector((state)=>(state.userLogin.value))
-
- useEffect(() =>{
-
-  onAuthStateChanged(auth, (user) => {
-    console.log(user)
-  if (user) {
-   dispatch(userLoginInfo({
-name: user.displayName,
-    email: user.email,
-    uid: user.uid
-   }
-    
-   ))
-    const uid = user.uid;
-    // ...
-  } else {
-    // User is signed out
-    // ...
-    dispatch(userLoginInfo(null))
-  }
-});
- }, [dispatch])
-
-useEffect(() => {
-  if(!data){
-    navigate('/login')
-  }
-} , [])
-
+  
 
  
   return (
