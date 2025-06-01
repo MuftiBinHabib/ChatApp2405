@@ -10,7 +10,7 @@ const SideBar = () => {
   return (
     <div className="container">
         <section className='font-display ms-4 mt-4 border min-h-screen w-55'>
-            <h2 className='mt-4 ms-4'>Welcome! {data.displayName}</h2>
+            <h2 className='mt-4 ms-4'>Welcome! {data.name}</h2>
 
             <ul className='w-50 space-y-2 mt-5 ms-4'>
                 <li className='text-black hover:bg-green-400 hover:text-white duration-500'>Chats</li>

@@ -45,8 +45,8 @@ const Login = () => {
           // ...
           console.log(user)
           if(user.emailVerified){
-            dispatch(userLoginInfo(user))
-            localStorage.setItem('login' , JSON.stringify(user))  //convert so browser can understand
+            dispatch(userLoginInfo(user)) // set data in redux
+            // localStorage.setItem('login' , JSON.stringify(user))  //convert so browser can understand
 navigate('/homepage')
           }else{
             toast.error("Please verify your email")
