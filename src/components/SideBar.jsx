@@ -1,4 +1,4 @@
-import { getAuth, onAuthStateChanged } from 'firebase/auth'
+import { getAuth, onAuthStateChanged , signOut } from 'firebase/auth'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router'
@@ -34,6 +34,7 @@ name: user.displayName,
     // User is signed out
     // ...
     dispatch(userLoginInfo(null))
+    navigate('/login')
   }
 });
  }, [dispatch])
@@ -48,6 +49,16 @@ useEffect(() => {
   const data = useSelector((state)=>(state.userLogin.value))
    console.log(data)
 
+   const handleLogOut=()=> {
+    signOut(auth).then(() => {
+      navigate('/')
+  // Sign-out successful.
+}).catch((error) => {
+  // An error happened.
+  alert(error)
+});
+   }
+
    
   return (
     <div className="container">
@@ -59,6 +70,7 @@ useEffect(() => {
                 <li className='text-black hover:bg-green-400 hover:text-white duration-500' >Groups</li>
                 <li className='text-black hover:bg-green-400 hover:text-white duration-500'>Friend Requests</li>
                 <li className='text-black hover:bg-green-400 hover:text-white duration-500'>Settings</li>
+                <li><button  onClick={handleLogOut} className ='cursor-pointer'>Logout</button></li>
             </ul>
 
 

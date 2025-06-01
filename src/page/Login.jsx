@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from "react-router";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, signInWithEmailAndPassword  , signInWithPopup} from "firebase/auth";
 import { auth } from "../firebase.config";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router";
@@ -9,7 +9,9 @@ import { userLoginInfo } from "../slices/userSlices";
 
 
 
+
 const Login = () => {
+  const provider = new GoogleAuthProvider();
    const dispatch = useDispatch();
   const [userInfo, setuserInfo] = useState({
     email: "",
@@ -71,6 +73,23 @@ navigate('/homepage')
       alert("email and pass required"); //edit this with toast
     }
   };
+
+  const handleGoogleLogin=()=>{
+    signInWithPopup(auth, provider)
+  .then((result) => {
+    
+    // The signed-in user info.
+    const user = result.user;
+    dispatch(userLoginInfo(user)) 
+    navigate('/homepage')
+    // IdP data available using getAdditionalUserInfo(result)
+    // ...
+  }).catch((error) => {
+    // Handle Errors here.
+    const errorCode = error.code;
+   console.log(errorCode)
+  });
+  }
 
 
   return (
@@ -163,7 +182,9 @@ navigate('/homepage')
                 >
                   Sign up
                 </Link>
+
               </p>
+                <button onClick={handleGoogleLogin} className="text-yellow-500 cursor-pointer">Sign In with Google</button>
             </form>
           </div>
         </div>
