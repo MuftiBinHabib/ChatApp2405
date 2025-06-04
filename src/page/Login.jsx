@@ -6,11 +6,14 @@ import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router";
 import { useDispatch } from "react-redux";
 import { userLoginInfo } from "../slices/userSlices";
+import { getDatabase, ref, set } from "firebase/database";
 
 
 
 
 const Login = () => {
+
+  const db = getDatabase();
   const provider = new GoogleAuthProvider();
    const dispatch = useDispatch();
   const [userInfo, setuserInfo] = useState({
@@ -80,9 +83,14 @@ navigate('/homepage')
     
     // The signed-in user info.
     const user = result.user;
+
+    set(ref(db, 'userslist/' + user.uid), {
+    name: user.displayName,
+    email: user.email,
+  });
     dispatch(userLoginInfo(user)) 
     navigate('/homepage')
-    // IdP data available using getAdditionalUserInfo(result)
+    
     // ...
   }).catch((error) => {
     // Handle Errors here.

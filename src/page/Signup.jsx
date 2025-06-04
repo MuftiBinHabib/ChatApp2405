@@ -4,15 +4,16 @@ import toast, { Toaster } from "react-hot-toast";
 import {
   getAuth,
   createUserWithEmailAndPassword,
-  sendEmailVerification,updateProfile
+  sendEmailVerification,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../firebase.config";
-
-
+import { getDatabase, ref, set } from "firebase/database";
 
 const Signup = () => {
+  const db = getDatabase();
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [userInfo, setuserInfo] = useState({
     name: "",
     email: "",
@@ -61,16 +62,22 @@ const Signup = () => {
             })
               .then(() => {
                 const user = userCredential.user;
-            // ...
-            console.log(user);
-            navigate('/login')
+                // ...
+                console.log(user);
+                set(ref(db, "userslist/" + user.uid), {
+                  name: user.displayName,
+                  email: user.email,
+                }).then(() =>{
+                  navigate('/login')
+                  
+                }).catch((error) =>{
+                  console.log(error)
+                })
               })
               .catch((error) => {
-                console.log(error)
+                console.log(error);
               });
-           
           });
-
         })
         .catch((error) => {
           const errorCode = error.code;
