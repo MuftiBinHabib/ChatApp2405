@@ -11,15 +11,13 @@ const SideBar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const auth = getAuth()
-  console.log(auth.currentUser)
-
-  console.log(auth.currentUser)
+  
 
 
  useEffect(() =>{
 
   onAuthStateChanged(auth, (user) => {
-    console.log(user)
+    
   if (user) {
    dispatch(userLoginInfo({
 name: user.displayName,
@@ -47,7 +45,7 @@ useEffect(() => {
 
 
   const data = useSelector((state)=>(state.userLogin.value))
-   console.log(data)
+  //  console.log(data)
 
    const handleLogOut=()=> {
     signOut(auth).then(() => {
@@ -67,7 +65,7 @@ useEffect(() => {
 
             <ul className='w-50 space-y-2 mt-5 ms-4'>
                 <li className='text-black hover:bg-green-400 hover:text-white duration-500'>Chats</li>
-                <li className='text-black hover:bg-green-400 hover:text-white duration-500' >Groups</li>
+                <li className='text-black hover:bg-green-400 hover:text-white duration-500' >Users</li>
                 <li className='text-black hover:bg-green-400 hover:text-white duration-500'>Friend Requests</li>
                 <li className='text-black hover:bg-green-400 hover:text-white duration-500'>Settings</li>
                 <li><button  onClick={handleLogOut} className ='cursor-pointer'>Logout</button></li>
