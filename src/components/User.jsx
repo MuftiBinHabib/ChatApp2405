@@ -6,6 +6,7 @@ import { getAuth } from 'firebase/auth';
 const User = () => {
   const auth = getAuth()
   const [userList,setuserlist] = useState([])
+  const [checkrequestid,setcheckrequestid] = useState([])
   const db = getDatabase();
 
   useEffect(() =>{
@@ -24,18 +25,10 @@ onValue(starCountRef, (snapshot) => {
   console.log(array)
 });
   } , [])
+  
 
-    const handlefrndreq = (item) =>{
-      
-        set(push((ref(db, "friendrequestlist/"))), {
-                        sendername : auth.currentUser.displayName,
-                        senderid : auth.currentUser.uid,
-                        receivername : item.name,
-                        receiverid : item.id,
-                      }).then(()=>{
-                        console.log("frnd req sent")
-                      })
-    }
+
+    console.log(checkrequestid)
   return (
     <div className="container">
         <section className='mt-4 font-display border  rounded w-50'>

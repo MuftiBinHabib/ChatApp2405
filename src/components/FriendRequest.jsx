@@ -6,6 +6,8 @@ import { getAuth } from 'firebase/auth';
 const FriendRequest = () => {
   const auth = getAuth()
   const [userList,setuserlist] = useState([])
+  const [checkrequestid,setcheckrequestid] = useState([])
+   const [checkfrndid,setcheckfrndid] = useState([])
   const db = getDatabase();
 
   useEffect(() =>{
@@ -18,11 +20,49 @@ onValue(starCountRef, (snapshot) => {
       array.push({...item.val() , id : item.key})
     }
 
+    setuserlist(array)
   })
-  setuserlist(array)
-  console.log(array)
+  
 });
   } , [])
+
+   //check request
+    useEffect(() =>{
+        const requestlistRef = ref(db, "friendrequestlist/");
+    onValue(requestlistRef, (snapshot) => {
+      const array = []
+      snapshot.forEach((item) =>{
+        // if(item.key != auth.currentUser.uid){  condition if not match with uid
+        // }
+        
+       
+      
+          array.push(item.val().senderid + item.val().receiverid)
+          
+      })
+      setcheckrequestid(array)
+      
+    });
+      } , [])
+
+       useEffect(() =>{
+        const requestlistRef = ref(db, "friendlist/");
+    onValue(requestlistRef, (snapshot) => {
+      const array = []
+      snapshot.forEach((item) =>{
+        // if(item.key != auth.currentUser.uid){  condition if not match with uid
+        // }
+        
+       
+      
+          array.push(item.val().senderid + item.val().receiverid)
+          
+      })
+      setcheckfrndid(array)
+      
+    });
+      } , [])
+
 
   const handlefrndreq = (item) =>{
     
@@ -44,7 +84,17 @@ onValue(starCountRef, (snapshot) => {
               {userList.map((item) =>{
                 return(
                   <>
-                  <p className='w-fit inline-block'>{item.name}</p><button onClick={()=>handlefrndreq(item)} className='bg-green-400 text-white ms-4 px-2 py-0.5 rounded'>+</button>
+                  <p className='w-fit inline-block'>{item.name}</p>
+                   {checkfrndid.includes(auth.currentUser.uid + item.id) || checkfrndid.includes(item.id+ auth.currentUser.uid )
+                  ?
+                <button className='ms-2 px-2 border'>Cancel</button> : 
+                   
+                   
+                   checkrequestid.includes(auth.currentUser.uid + item.id) || checkrequestid.includes(item.id+ auth.currentUser.uid )
+                  ?
+                <button className='ms-2 px-2 border'>Cancel</button> : 
+                   <button onClick={()=>handlefrndreq(item)} className='bg-green-400 text-white ms-4 px-2 py-0.5 rounded'>+</button>}
+
                   </>
                   
                   

@@ -10,6 +10,7 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { userLoginInfo } from '../slices/userSlices'
 import User from '../components/User'
 import FriendRequestlist from '../components/FriendRequestlist'
+import Friendlist from '../components/FriendList'
 
 
 
@@ -26,6 +27,7 @@ const Homepage = () => {
         <FriendRequest />
         <Settings />
         <FriendRequestlist />
+        <Friendlist />
       </section>
     </div>
   )

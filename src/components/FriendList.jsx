@@ -3,24 +3,26 @@ import { getDatabase, ref, onValue, set, push, remove } from "firebase/database"
 import { getAuth } from 'firebase/auth';
 
 
-const FriendRequestlist = () => {
+const FriendList = () => {
     const[reqlist,setrequestlist] = useState([])
   const auth = getAuth()
   const [userList,setuserlist] = useState([])
   const db = getDatabase();
 
    useEffect(() =>{
-      const requestlistRef = ref(db, "friendrequestlist/");
+      const requestlistRef = ref(db, "friendlist/");
   onValue(requestlistRef, (snapshot) => {
     const array = []
     snapshot.forEach((item) =>{
       // if(item.key != auth.currentUser.uid){  condition if not match with uid
       // }
-      if ( auth.currentUser.uid == item.val().senderid || auth.currentUser.uid == item.val().receiverid )
+      
   
      
-    
+    if( auth.currentUser.uid == item.val().senderid || auth.currentUser.uid == item.val().receiverid  ){
+
         array.push({...item.val() , id : item.key})
+    }
     })
     setrequestlist(array)
   });
@@ -28,17 +30,7 @@ const FriendRequestlist = () => {
     
     console.log(reqlist)
 
-    const handlefrndreq = (item) =>{
-      
-        set(push((ref(db, "friendrequestlist/"))), {
-                        sendername : auth.currentUser.displayName,
-                        senderid : auth.currentUser.uid,
-                        receivername : item.name,
-                        receiverid : item.id,
-                      }).then(()=>{
-                        console.log("frnd req sent")
-                      })
-    }
+    
 
     const handlefriendaccept = (item) =>{
       
@@ -58,15 +50,24 @@ const FriendRequestlist = () => {
     <div className="container">
         <section className='mt-4 font-display border  rounded w-50'>
 
-            <h2 className='w-50 bg-green-400 text-white rounded'>Friend Request List</h2>
+            <h2 className='w-50 bg-green-400 text-white rounded'>Friend  List</h2>
 
             <ul className='space-y-2 mt-4 ms-4'>
 
               {reqlist.map((item) =>{
                 return(
                   <>
-                  <p className='w-fit inline-block'>{item.receivername}</p>
-                  <button onClick={() => {handlefriendaccept(item)}} className='ms-2 px-2 bg-blue-400 text-white rounded'>Accept</button>
+                    {auth.currentUser.uid == item.senderid ?(
+                    
+                    <p className='w-fit inline-block'>
+                  {item.receivername}  </p>
+                     ) : (
+   
+                     <p>{item.senderrname}</p>
+
+                        )}
+                  
+                  
                   </>
                   
                   
@@ -82,4 +83,4 @@ const FriendRequestlist = () => {
   )
 }
 
-export default FriendRequestlist
+export default FriendList

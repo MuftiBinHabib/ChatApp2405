@@ -68,6 +68,7 @@ useEffect(() => {
                 <li className='text-black hover:bg-green-400 hover:text-white duration-500' >Users</li>
                 <li className='text-black hover:bg-green-400 hover:text-white duration-500'>Friend Requests</li>
                 <li className='text-black hover:bg-green-400 hover:text-white duration-500'>Settings</li>
+                 <li className='text-black hover:bg-green-400 hover:text-white duration-500'>Friends</li>
                 <li><button  onClick={handleLogOut} className ='cursor-pointer'>Logout</button></li>
             </ul>
 
