@@ -57,15 +57,14 @@ const FriendList = () => {
               {reqlist.map((item) =>{
                 return(
                   <>
-                    {auth.currentUser.uid == item.senderid ?(
-                    
-                    <p className='w-fit inline-block'>
-                  {item.receivername}  </p>
-                     ) : (
-   
-                     <p>{item.senderrname}</p>
+                 {
+  auth.currentUser.uid === item.senderid ? (
+    <p className="w-fit inline-block">{item.receivername}</p>
+  ) : auth.currentUser.uid === item.receiverid ? (
+    <p className="w-fit inline-block">{item.sendername}</p>
+  ) : null
+}
 
-                        )}
                   
                   
                   </>

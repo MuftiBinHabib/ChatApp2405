@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { getDatabase, ref, onValue, set, push } from "firebase/database";
+import { getDatabase, ref, onValue, set, push, remove } from "firebase/database";
 import { getAuth } from 'firebase/auth';
 
 
@@ -63,7 +63,7 @@ onValue(starCountRef, (snapshot) => {
     });
       } , [])
 
-
+//for adding frnd
   const handlefrndreq = (item) =>{
     
       set(push((ref(db, "friendrequestlist/"))), {
@@ -73,6 +73,16 @@ onValue(starCountRef, (snapshot) => {
                       receiverid : item.id,
                     })
   }
+
+
+  //for delete frnd
+  const handleremove = (item) => {
+  // alert("Remove button clicked");
+  // console.log("Remove button clicked");
+remove(ref(db, "friendrequestlist/"))
+                    
+
+}
   return (
     <div className="container">
         <section className='mt-4 font-display border  rounded w-50'>
@@ -81,18 +91,19 @@ onValue(starCountRef, (snapshot) => {
 
             <ul className='space-y-2 mt-4 ms-4'>
 
+
               {userList.map((item) =>{
                 return(
                   <>
                   <p className='w-fit inline-block'>{item.name}</p>
                    {checkfrndid.includes(auth.currentUser.uid + item.id) || checkfrndid.includes(item.id+ auth.currentUser.uid )
                   ?
-                <button className='ms-2 px-2 border'>Cancel</button> : 
+                <button onClick={handleremove}className='ms-2 px-2 border'>Remove</button> : 
                    
                    
                    checkrequestid.includes(auth.currentUser.uid + item.id) || checkrequestid.includes(item.id+ auth.currentUser.uid )
                   ?
-                <button className='ms-2 px-2 border'>Cancel</button> : 
+                <button onClick={handleremove} className='ms-2 px-2 border'>Remove</button> : 
                    <button onClick={()=>handlefrndreq(item)} className='bg-green-400 text-white ms-4 px-2 py-0.5 rounded'>+</button>}
 
                   </>

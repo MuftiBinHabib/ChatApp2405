@@ -25,7 +25,7 @@ const Homepage = () => {
         <Chats />
         <User />
         <FriendRequest />
-        <Settings />
+        
         <FriendRequestlist />
         <Friendlist />
       </section>
