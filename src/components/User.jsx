@@ -40,7 +40,7 @@ onValue(starCountRef, (snapshot) => {
               {userList.map((item) =>{
                 return(
                   <>
-                  <p className='w-fit inline-block'>{item.name}</p>
+                  <p className='w-fit inline-block'>{item.name}</p><br />
                   </>
                   
                   

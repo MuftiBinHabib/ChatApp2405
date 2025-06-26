@@ -11,6 +11,7 @@ import { userLoginInfo } from '../slices/userSlices'
 import User from '../components/User'
 import FriendRequestlist from '../components/FriendRequestlist'
 import Friendlist from '../components/FriendList'
+import BlockList from '../components/BlockList'
 
 
 
@@ -28,6 +29,7 @@ const Homepage = () => {
         
         <FriendRequestlist />
         <Friendlist />
+        <BlockList />
       </section>
     </div>
   )

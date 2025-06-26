@@ -85,9 +85,9 @@ remove(ref(db, "friendrequestlist/"))
 }
   return (
     <div className="container">
-        <section className='mt-4 font-display border  rounded w-50'>
+        <section className='mt-4 font-display border  rounded w-60'>
 
-            <h2 className='w-50 bg-green-400 text-white rounded'>Friend Request</h2>
+            <h2 className='w-60 bg-green-400 text-white rounded'>Friend Request</h2>
 
             <ul className='space-y-2 mt-4 ms-4'>
 
@@ -95,10 +95,11 @@ remove(ref(db, "friendrequestlist/"))
               {userList.map((item) =>{
                 return(
                   <>
-                  <p className='w-fit inline-block'>{item.name}</p>
+                  <p className='w-fit inline-block'>{item.name} </p>
                    {checkfrndid.includes(auth.currentUser.uid + item.id) || checkfrndid.includes(item.id+ auth.currentUser.uid )
                   ?
-                <button onClick={handleremove}className='ms-2 px-2 border'>Remove</button> : 
+                  
+                <button onClick={handleremove}className='ms-2 px-2 border inline-block'>Remove</button> : 
                    
                    
                    checkrequestid.includes(auth.currentUser.uid + item.id) || checkrequestid.includes(item.id+ auth.currentUser.uid )

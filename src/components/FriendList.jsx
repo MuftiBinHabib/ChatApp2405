@@ -44,7 +44,35 @@ const FriendList = () => {
                           console.log(item);
     }
 
+  const handleBlock = (item) =>{
+
+    // console.log('block' , item)
+    if(auth.currentUser.uid == item.senderid){
+      console.log("receiver" ,item)
+      set(push((ref(db, "blocklist/"))), {
+                           blockbyuser : item.senderid,
+                           blockbyusername: item.sendername,
+                           blockuser : item.receiverid,
+                           blockusername : item.receivername
+                          }).then(() => {
+                            remove((ref(db, "friendlist/" + item.id)))
   
+                        
+                          })
+                          console.log(item);
+    } else {
+         set(push((ref(db, "blocklist/"))), {
+                           blockbyuser : item.receiverid,
+                           blockbyusername: item.receivername,
+                           blockuser : item.senderid,
+                           blockusername : item.sendername
+                          }).then(() => {
+                            remove((ref(db, "friendlist/" + item.id)))
+  
+                        
+                          })
+    }
+  }
 
   return (
     <div className="container">
@@ -59,11 +87,13 @@ const FriendList = () => {
                   <>
                  {
   auth.currentUser.uid === item.senderid ? (
-    <p className="w-fit inline-block">{item.receivername}</p>
+    
+    <div><p className="w-fit inline-block">{item.receivername} </p> <button onClick={() =>{handleBlock(item)}} className='bg-green-500 text-white px-2 py-1 rounded'>Block</button></div>
   ) : auth.currentUser.uid === item.receiverid ? (
-    <p className="w-fit inline-block">{item.sendername}</p>
+    <div><p className="w-fit inline-block">{item.sendername} </p> <button onClick={() =>{handleBlock(item)}} className='bg-green-500 text-white px-2 py-1 rounded'>Block</button></div>
   ) : null
 }
+
 
                   
                   
