@@ -1,13 +1,14 @@
 import { getAuth, onAuthStateChanged , signOut } from 'firebase/auth'
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router'
+import { Link, useLocation, useNavigate } from 'react-router'
 import { userLoginInfo } from '../slices/userSlices'
 
 
 
 const SideBar = () => {
 
+  const {pathname} = useLocation()
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const auth = getAuth()
@@ -57,14 +58,14 @@ useEffect(() => {
 });
    }
 
-   
+  //  ${pathname == '/homepage' && "bg-red-500 text-white"}
   return (
     <div className="container">
         <section className='font-display ms-4 mt-4 border min-h-screen w-55'>
             <h2 className='mt-4 ms-4'>Welcome! {data.name}</h2>
 
-            <ul className='w-50 space-y-2 mt-5 ms-4'>
-                <li className='text-black hover:bg-green-400 hover:text-white duration-500'>Chats</li>
+            <ul className={`w-50 space-y-2  mt-5 ms-4 `}>
+                <Link to='/homepage/chats'><li className='text-black hover:bg-green-400 hover:text-white duration-500'>Chats</li></Link>
                 <li className='text-black hover:bg-green-400 hover:text-white duration-500' >Users</li>
                 <li className='text-black hover:bg-green-400 hover:text-white duration-500'>Friend Requests</li>
                 <li className='text-black hover:bg-green-400 hover:text-white duration-500'>Settings</li>

@@ -23,7 +23,7 @@ const Homepage = () => {
   return (
     <div className="container">
       <section className='grid grid-cols-2 gap-20'>
-        <Chats />
+        
         <User />
         <FriendRequest />
         

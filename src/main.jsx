@@ -17,6 +17,7 @@ import Rootlayout from './components/Rootlayout.jsx';
 import LoginData from '../context/LoginData.jsx';
 import { store } from './store'
 import { Provider } from 'react-redux'
+import Chats from './components/Chats.jsx';
 
 
 
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
     path: "/signup",
       element : <Signup />,
   },
+ 
    {
     path: "/homepage",
       element : <Rootlayout />,
@@ -45,6 +47,10 @@ const router = createBrowserRouter([
         index: true,
         element: <Homepage /> 
       },
+       {
+    path: "chats",
+      element : <Chats />,
+  },
        ]
   },
       

@@ -1,61 +1,117 @@
 import React, { useState } from 'react';
+import FriendListMsg from './FriendListMsg';
 
 const Chats = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  
 
   return (
-    <div className="container">
-      <section className='mt-4 font-display border  rounded w-50'>
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="w-50 bg-green-400 text-white rounded"
-      >
-        {isOpen ? 'Hide Chat' : 'Show Chat'}
-      </button>
-
-      {/* Chat Block (Hidden by default) */}
-      {isOpen && (
-        <div className="flex items-start gap-2.5">
-          <img
-            className="w-8 h-8 rounded-full"
-            src="/docs/images/people/profile-picture-3.jpg"
-            alt="Jese image"
-          />
-          <div className="flex flex-col w-full max-w-[320px] leading-1.5 p-4 border-gray-200 bg-gray-100 rounded-e-xl rounded-es-xl dark:bg-gray-700">
-            <div className="flex items-center space-x-2 rtl:space-x-reverse">
-              <span className="text-sm font-semibold text-gray-900 dark:text-white">
-                Bonnie Green
-              </span>
-              <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-                11:46
-              </span>
-            </div>
-            <p className="text-sm font-normal py-2.5 text-gray-900 dark:text-white">
-              That's awesome. I think our users will really appreciate the improvements.
-            </p>
-            <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-              Delivered
-            </span>
-          </div>
-
-          <button
-            className="inline-flex self-center items-center p-2 text-sm font-medium text-gray-900 bg-white rounded-lg hover:bg-gray-100 focus:ring-4 focus:outline-none dark:text-white focus:ring-gray-50 dark:bg-gray-900 dark:hover:bg-gray-800 dark:focus:ring-gray-600"
-            type="button"
-          >
-            <svg
-              className="w-4 h-4 text-gray-500 dark:text-gray-400"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 4 15"
-            >
-              <path d="M3.5 1.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 6.041a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Zm0 5.959a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z" />
-            </svg>
-          </button>
-        </div>
-      )}
-      </section>
+    <>
+  {/* This is an example component */}
+  <div className="w-full h-screen shadow-lg rounded-lg">
+    {/* headaer */}
+    <div className="px-5 py-5 flex justify-between items-center bg-white border-b-2">
+      <div className="font-semibold text-2xl">GoingChat</div>
+      <div className="w-1/2">
+        <input
+          type="text"
+          name=""
+          id=""
+          placeholder="search IRL"
+          className="rounded-2xl bg-gray-100 py-3 px-5 w-full"
+        />
+      </div>
+      <div className="h-12 w-12 p-2 bg-yellow-500 rounded-full text-white font-semibold flex items-center justify-center">
+        RA
+      </div>
     </div>
+    {/* end header */}
+    {/* Chatting */}
+    <div className="flex flex-row justify-between bg-white">
+      {/* chat list */}
+      <FriendListMsg />
+      {/* end chat list */}
+      {/* message */}
+      <div className="w-2/4 px-5 flex flex-col justify-between">
+        <div className="flex flex-col mt-5">
+          <div className="flex justify-end mb-4">
+            <div className="mr-2 py-3 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
+              Welcome to group everyone !
+            </div>
+            <img
+              src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
+              className="object-cover h-8 w-8 rounded-full"
+              alt=""
+            />
+          </div>
+          <div className="flex justify-start mb-4">
+            <img
+              src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
+              className="object-cover h-8 w-8 rounded-full"
+              alt=""
+            />
+            <div className="ml-2 py-3 px-4 bg-gray-400 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
+              at praesentium, aut ullam delectus odio error sit rem. Architecto
+              nulla doloribus laborum illo rem enim dolor odio saepe,
+              consequatur quas?
+            </div>
+          </div>
+          <div className="flex justify-end mb-4">
+            <div>
+              <div className="mr-2 py-3 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+                Magnam, repudiandae.
+              </div>
+              <div className="mt-4 mr-2 py-3 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                Debitis, reiciendis!
+              </div>
+            </div>
+            <img
+              src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
+              className="object-cover h-8 w-8 rounded-full"
+              alt=""
+            />
+          </div>
+          <div className="flex justify-start mb-4">
+            <img
+              src="https://source.unsplash.com/vpOeXr5wmR4/600x600"
+              className="object-cover h-8 w-8 rounded-full"
+              alt=""
+            />
+            <div className="ml-2 py-3 px-4 bg-gray-400 rounded-br-3xl rounded-tr-3xl rounded-tl-xl text-white">
+              happy holiday guys!
+            </div>
+          </div>
+        </div>
+        <div className="py-5">
+          <input
+            className="w-full bg-gray-300 py-5 px-3 rounded-xl"
+            type="text"
+            placeholder="type your message here..."
+          />
+        </div>
+      </div>
+      {/* end message */}
+      <div className="w-1/4 border-l-2 px-5">
+        <div className="flex flex-col">
+          <div className="font-semibold text-xl py-4">Mern Stack Group</div>
+          <img
+            src="https://source.unsplash.com/L2cxSuKWbpo/600x600"
+            className="object-cover rounded-xl h-64"
+            alt=""
+          />
+          <div className="font-semibold py-4">Created 22 Sep 2021</div>
+          <div className="font-light">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt,
+            perspiciatis!
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</>
+
   );
 };
 
