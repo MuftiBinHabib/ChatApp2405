@@ -5,11 +5,11 @@ const Chats = () => {
   
 
   return (
-    <>
+    <div className="w-full">
   {/* This is an example component */}
-  <div className="w-full h-screen shadow-lg rounded-lg">
+  <div className=" w-[700px] h-screen shadow-lg rounded-lg">
     {/* headaer */}
-    <div className="px-5 py-5 flex justify-between items-center bg-white border-b-2">
+    <div className=" py-5 flex justify-between items-center bg-white border-b-2 w-full">
       <div className="font-semibold text-2xl">GoingChat</div>
       <div className="w-1/2">
         <input
@@ -26,9 +26,11 @@ const Chats = () => {
     </div>
     {/* end header */}
     {/* Chatting */}
-    <div className="flex flex-row justify-between bg-white">
+    <div className="flex flex-row justify-between">
       {/* chat list */}
+      
       <FriendListMsg />
+     
       {/* end chat list */}
       {/* message */}
       <div className="w-2/4 px-5 flex flex-col justify-between">
@@ -110,7 +112,7 @@ const Chats = () => {
       </div>
     </div>
   </div>
-</>
+</div>
 
   );
 };
