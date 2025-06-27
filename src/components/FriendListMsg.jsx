@@ -6,6 +6,7 @@ const FriendListMsg = () => {
     const[friendlist, setfriendlist] = useState([])
 
      const db = getDatabase();
+     const auth = getAuth();
      
     
        useEffect(() =>{
@@ -27,6 +28,10 @@ const FriendListMsg = () => {
       });
         } , [])
 console.log(friendlist)
+
+let handleSelectUser = (item) =>{
+  console.log("clicked" , item)
+}
   return (
     <div className="w-1/4 border-r-2 overflow-y-auto">
         {/* search compt */}
@@ -41,14 +46,14 @@ console.log(friendlist)
         {/* user list */}
         {friendlist.map((item) => (
 
-        <div className="flex flex-row py-4 px-2 justify-center items-center border-b-2">
+        <div onClick = {() => handleSelectUser(item)} className="flex flex-row py-4 px-2 justify-center items-center border-b-2">
           
           <div className="w-100">
-            {auth.currentUser.uid == item.senderid ? 
-            <div className="text-lg font-semibold">{item.receivername}</div> : 
-            <div className="text-lg font-semibold">{item.sendername}</div>
+            {auth.currentUser.uid == item.senderid ? (
+            <div className="text-lg font-semibold">{item.receivername}</div> ):( 
+            <div className="text-lg font-semibold">{item.sendername}</div> )
             }
-            <span className="text-gray-500">Pick me at 9:00 Am</span>
+          
           </div>
         </div>
         ))}
