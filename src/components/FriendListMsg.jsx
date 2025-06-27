@@ -1,12 +1,18 @@
 import { getAuth } from 'firebase/auth';
 import { getDatabase, ref, onValue, set, push, remove } from "firebase/database";
 import React, { useEffect, useState } from 'react'
+import { useDispatch } from "react-redux"
+import { chattinguser } from '../slices/chatSlice';
+import { useSelector } from 'react-redux';
 
 const FriendListMsg = () => {
+  const user = useSelector((state)=>state.chatInfo.value)
+ 
     const[friendlist, setfriendlist] = useState([])
 
      const db = getDatabase();
      const auth = getAuth();
+     const dispatch = useDispatch()
      
     
        useEffect(() =>{
@@ -30,7 +36,11 @@ const FriendListMsg = () => {
 console.log(friendlist)
 
 let handleSelectUser = (item) =>{
-  console.log("clicked" , item)
+ if(auth.currentUser.uid == item.senderid){
+ dispatch(chattinguser({name: item.receivername, id: item.receiverid}))
+ } else {
+   dispatch(chattinguser({name: item.sendername, id: item.senderid}))
+ }
 }
   return (
     <div className="w-1/4 border-r-2 overflow-y-auto">
@@ -46,7 +56,7 @@ let handleSelectUser = (item) =>{
         {/* user list */}
         {friendlist.map((item) => (
 
-        <div onClick = {() => handleSelectUser(item)} className="flex flex-row py-4 px-2 justify-center items-center border-b-2">
+        <div onClick = {() => handleSelectUser(item)} className={`flex flex-row py-4 px-2 ${user?.id == item.senderid || user?.id == item.receiverid ? "bg-green-400 text-white" : "bg-transparent"} justify-center items-center border-b-2`}>
           
           <div className="w-100">
             {auth.currentUser.uid == item.senderid ? (
