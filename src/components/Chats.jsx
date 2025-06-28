@@ -3,6 +3,8 @@ import FriendListMsg from './FriendListMsg';
 import { useSelector } from 'react-redux';
 import { getDatabase, onValue, push, ref, set } from 'firebase/database';
 import { getAuth } from 'firebase/auth';
+import moment from 'moment';
+
 
 const Chats = () => {
   const db = getDatabase()
@@ -83,11 +85,14 @@ const Chats = () => {
         <div className="flex flex-col mt-5">
           {msglist.map((msgitem) => (
             msgitem.senderid == auth.currentUser.uid ? 
-            <div>
-            <h2>{msgitem.msg}</h2>
+            <div className='flex justify-end bg-gray-500 text-white'>
+            <h2>{msgitem.msg}</h2> <br />
+            <p className='text-sm'>{moment().startOf('hour').fromNow()}; </p>
             </div>
             :
-            <h2>{msgitem.msg}</h2>
+            <div className='justify-start bg-green-400'><h2>{msgitem.msg}</h2> <br />
+            <p className='text-sm'>{moment().startOf('hour').fromNow()}; </p></div>
+            
           ))}
            {/* <div className="flex justify-end mb-4">
             <div className="mr-2 py-3 px-4 bg-blue-400 rounded-bl-3xl rounded-tl-3xl rounded-tr-xl text-white">
