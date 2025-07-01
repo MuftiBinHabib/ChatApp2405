@@ -45,14 +45,18 @@ const Chats = () => {
           
       
          
-        if(auth.currentUser.uid == item.val().senderid || auth.currentUser.uid == item.val().receiverid  ){
+        if(
+          (auth.currentUser.uid == item.val().senderid && user?.id == item.val().receiverid) || 
+          (auth.currentUser.uid == item.val().receiverid && user?.id == item.val().senderid 
+        ) )
+        {
     
             array.push({...item.val() , id : item.key})
         }
         })
         setMsglist(array)
       });
-  },[])
+  },[user?.id])
   
   return (
     <div className="w-full">
@@ -84,6 +88,7 @@ const Chats = () => {
       <div className="w-2/4 px-5 flex flex-col justify-between">
         <div className="flex flex-col mt-5">
           {msglist.map((msgitem) => (
+            
             msgitem.senderid == auth.currentUser.uid ? 
             <div className='flex justify-end bg-gray-500 text-white'>
             <h2>{msgitem.msg}</h2> <br />

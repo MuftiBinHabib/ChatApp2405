@@ -9,7 +9,7 @@ const FriendListMsg = () => {
   const user = useSelector((state)=>state.chatInfo.value)
  
     const[friendlist, setfriendlist] = useState([])
-
+const[filterresult, setfilterresult] = useState([])
      const db = getDatabase();
      const auth = getAuth();
      const dispatch = useDispatch()
@@ -42,13 +42,22 @@ let handleSelectUser = (item) =>{
    dispatch(chattinguser({name: item.sendername, id: item.senderid}))
  }
 }
+
+let handleSearch = (e) => {
+  
+  let filterresult = friendlist.filter((item) => item.sendername.toUpperCase() == e.target.value.toUpperCase() || item.receivername.toUpperCase() == e.target.value.toUpperCase() );
+  setfilterresult(filterresult)
+}
+
+console.log(filterresult)
   return (
     <div className="w-1/4 border-r-2 overflow-y-auto">
         {/* search compt */}
-        <div className="border-b-2 py-4 px-2 w-100">
+        <div className="border-b-2 py-4 px-2">
           <input
+          onChange={handleSearch}
             type="text"
-            placeholder="search chatting"
+            placeholder="Search Users"
             className="py-2 px-2 border-2 border-gray-200 rounded-2xl w-full"
           />
         </div>
