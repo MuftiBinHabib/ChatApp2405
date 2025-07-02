@@ -10,6 +10,7 @@ const FriendListMsg = () => {
  
     const[friendlist, setfriendlist] = useState([])
 const[filterresult, setfilterresult] = useState([])
+const[testresult, settestresult] = useState([])
      const db = getDatabase();
      const auth = getAuth();
      const dispatch = useDispatch()
@@ -45,7 +46,7 @@ let handleSelectUser = (item) =>{
 
 let handleSearch = (e) => {
   
-  let filterresult = friendlist.filter((item) => item.sendername.toUpperCase() == e.target.value.toUpperCase() || item.receivername.toUpperCase() == e.target.value.toUpperCase() );
+  let filterresult = friendlist.filter((item) => item.sendername.toUpperCase().replaceAll(" ","").includes(e.target.value.toUpperCase()) || item.receivername.toUpperCase().replaceAll(" ","").includes(e.target.value.toUpperCase()));
   setfilterresult(filterresult)
 }
 
@@ -63,7 +64,24 @@ console.log(filterresult)
         </div>
         {/* end search compt */}
         {/* user list */}
-        {friendlist.map((item) => (
+        
+
+        {filterresult ?
+        filterresult.map((item) => (
+
+        <div onClick = {() => handleSelectUser(item)} className={`flex flex-row py-4 px-2 ${user?.id == item.senderid || user?.id == item.receiverid ? "bg-green-400 text-white" : "bg-transparent"} justify-center items-center border-b-2`}>
+          
+          <div className="w-100">
+            {auth.currentUser.uid == item.senderid ? (
+            <div className="text-lg font-semibold">{item.receivername}</div> ):( 
+            <div className="text-lg font-semibold">{item.sendername}</div> )
+            }
+          
+          </div>
+        </div>
+        )) : 
+        
+        friendlist.map((item) => (
 
         <div onClick = {() => handleSelectUser(item)} className={`flex flex-row py-4 px-2 ${user?.id == item.senderid || user?.id == item.receiverid ? "bg-green-400 text-white" : "bg-transparent"} justify-center items-center border-b-2`}>
           
